@@ -10,17 +10,20 @@ let pcNumber;
 
 let numbersList = [];
 
+let output = document.getElementById("numbers");
+
 
 for ( let i = 0; i < 5; i++){
     pcNumber = randomNumberOnly(numbersList, 1, 100);
 
     numbersList.push(pcNumber);
 
-    document.getElementById("numbers").innerHTML += ` ${pcNumber} `;
+    output.innerHTML += ` ${pcNumber}    `;
 }
 
 setTimeout(function (){
-    document.getElementById("numbers").innerHTML = ``;
+    output.innerHTML = ``;
+    output.classList.remove("border", "border-primary");
 }, 2990);
 
 setTimeout(function (){
@@ -29,45 +32,46 @@ setTimeout(function (){
 
     let listRightNumbers = [];
 
+    let listUnavailableNumber = [];
+
     for ( let i = 1; i <= 5; i++){
 
-        let userNumber = parseInt( prompt( `Inserisci il ${i}° numero che hai visto`));
+        let flag = false;
 
-        console.log(userNumber);
+        while (!flag){
 
-        if ((numbersList.includes(userNumber))){
+            let userNumber = parseInt( prompt( `Inserisci il ${i}° numero che hai visto`));
+    
+            if(!(listUnavailableNumber.includes(userNumber))){
+                flag = true;
+                listUnavailableNumber.push(userNumber);
+                if ((numbersList.includes(userNumber))){
 
-            counter ++;
-
-            listRightNumbers.push(userNumber);
-
-        }
+                    counter ++;
+        
+                    listRightNumbers.push(userNumber);
+        
+                }
+            }
+    
+        } 
 
     }
 
     if(counter == 0){
 
-        document.getElementById("numbers").innerHTML = `Mi dispiace hai una cattiva memoria non hai indovinato nemmeno un numero`;
+        output.innerHTML = `Mi dispiace hai una cattiva memoria non hai indovinato nemmeno un numero`;
+        output.classList.add("border", "border-danger");
     }
     else{
-        document.getElementById("numbers").innerHTML = `Bravo! Numeri indovinati: ${counter} ; numeri : ${listRightNumbers}`;
+        output.innerHTML = `Bravo! Numeri indovinati: ${counter} ; numeri : ${listRightNumbers}`;
+        output.classList.add("border", "border-success");
     }
 
     
 
 
 }, 3000);
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -80,7 +84,7 @@ setTimeout(function (){
  * @returns 
  */
 
- function randomNumberOnly (listUnavailableNumber,min, max){
+function randomNumberOnly (listUnavailableNumber,min, max){
 
     let randomNumber;
 
