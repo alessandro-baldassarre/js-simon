@@ -18,14 +18,14 @@ for ( let i = 0; i < 5; i++){
 
     numbersList.push(pcNumber);
 
-    output.innerHTML += `  ${pcNumber}  `;
+    output.innerHTML += `<span class="mx-3">${pcNumber}</span>`;
 }
 
 // timingfunction to reset the display of numbers from the screen
 setTimeout(function (){
     output.innerHTML = ``;
     output.classList.remove("border", "border-primary");
-}, 2990);
+}, 29900);
 
 // timingfunction that starts after 30 seconds
 setTimeout(function (){
@@ -79,7 +79,7 @@ setTimeout(function (){
     
 
 
-}, 3000);
+}, 30000);
 
 
 
