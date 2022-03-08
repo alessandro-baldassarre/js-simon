@@ -5,27 +5,29 @@
 // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
 
 
-
+// variables
 let pcNumber;
 
 let numbersList = [];
 
 let output = document.getElementById("numbers");
 
-
+// for loop to create 5 random numbers and display them on the screen
 for ( let i = 0; i < 5; i++){
     pcNumber = randomNumberOnly(numbersList, 1, 100);
 
     numbersList.push(pcNumber);
 
-    output.innerHTML += ` ${pcNumber}    `;
+    output.innerHTML += `  ${pcNumber}  `;
 }
 
+// timingfunction to reset the display of numbers from the screen
 setTimeout(function (){
     output.innerHTML = ``;
     output.classList.remove("border", "border-primary");
 }, 2990);
 
+// timingfunction that starts after 30 seconds
 setTimeout(function (){
 
     let counter = 0;
@@ -34,19 +36,24 @@ setTimeout(function (){
 
     let listUnavailableNumber = [];
 
+    // for loop to have the user enter the numbers to guess five times
+
     for ( let i = 1; i <= 5; i++){
 
         let flag = false;
 
+        // check that verifies that the user does not enter the same number more than once
         while (!flag){
 
             let userNumber = parseInt( prompt( `Inserisci il ${i}° numero che hai visto`));
-    
+            
+            // when the number is available I insert it in the list of numbers entered by the user and compare it with the random number list created previously
             if(!(listUnavailableNumber.includes(userNumber))){
                 flag = true;
                 listUnavailableNumber.push(userNumber);
                 if ((numbersList.includes(userNumber))){
 
+                    // when a number corresponds to one of the random list I increase the counter and insert it in the list of guessed numbers
                     counter ++;
         
                     listRightNumbers.push(userNumber);
@@ -58,6 +65,7 @@ setTimeout(function (){
 
     }
 
+    // check with the counter how many numbers the user has guessed and print it on the screen
     if(counter == 0){
 
         output.innerHTML = `Mi dispiace hai una cattiva memoria non hai indovinato nemmeno un numero`;
